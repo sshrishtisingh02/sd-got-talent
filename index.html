@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SD Got Talent — AI Video Evaluation Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --brand-primary: #002561;
+      --brand-accent: #0066FF;
+      --brand-bg: #F4F7FC;
+      --brand-dark: #0A192F;
+    }
+    body { background-color: var(--brand-bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .bg-brand-blue { background-color: var(--brand-primary); }
+    .text-brand-blue { color: var(--brand-primary); }
+    .bg-brand-accent { background-color: var(--brand-accent); }
+    .text-brand-accent { color: var(--brand-accent); }
+    .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+  </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+  <!-- TOP ENTERPRISE NAVBAR -->
+  <header class="bg-brand-blue text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('landing')">
+        <div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center font-bold text-xl tracking-wider text-white shadow-inner">
+          SD
+        </div>
+        <div>
+          <span class="text-lg font-bold tracking-tight">SD Got Talent</span>
+          <span class="text-xs block text-blue-200">Service Delivery Evaluation Platform</span>
+        </div>
+      </div>
+      <nav class="hidden md:flex space-x-6 text-sm font-medium">
+        <button onclick="navigateTo('landing')" class="hover:text-blue-300 transition">Home</button>
+        <button onclick="navigateTo('upload')" class="hover:text-blue-300 transition">Upload Video</button>
+        <button onclick="navigateTo('dashboard')" class="hover:text-blue-300 transition">Leadership Dashboard</button>
+        <button onclick="navigateTo('comparison')" class="hover:text-blue-300 transition">Candidate Matrix</button>
+      </nav>
+      <div class="flex items-center space-x-2">
+        <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-blue-800 text-blue-200 border border-blue-600">Enterprise AI Active</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- VIEW 1: LANDING PAGE -->
+    <section id="view-landing" class="space-y-12">
+      <div class="relative rounded-2xl bg-gradient-to-r from-[#00173d] via-[#002b66] to-[#004f9e] text-white p-8 md:p-12 shadow-xl overflow-hidden">
+        <div class="relative z-10 max-w-3xl space-y-4">
+          <span class="inline-block px-3 py-1 bg-blue-500 bg-opacity-30 border border-blue-400 rounded-full text-xs font-semibold uppercase tracking-wider text-blue-200">
+            Internal Talent & Leadership Acceleration
+          </span>
+          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Your Talent. Your Story. Your Platform.</h1>
+          <p class="text-lg text-blue-100 leading-relaxed">
+            Discover, showcase, and amplify the talent already within Service Delivery. Submit your 3-minute video showcase to receive explainable, evidence-backed evaluation mapped to our standardized capability framework.
+          </p>
+          <div class="pt-4 flex flex-wrap gap-4">
+            <button onclick="navigateTo('upload')" class="px-6 py-3.5 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl shadow-lg transition flex items-center space-x-2">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <span>Upload Your Video</span>
+            </button>
+            <button onclick="navigateTo('dashboard')" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl border border-white/20 transition flex items-center space-x-2">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Explore Dashboard</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Mandatories Overview -->
+      <div>
+        <div class="text-center max-w-2xl mx-auto mb-8">
+          <h2 class="text-2xl font-bold text-slate-900">The 4 Evaluation Topics (60 Points)</h2>
+          <p class="text-sm text-slate-600">Every submission is transcribed and objectively evaluated against 4 mandatory pillars.</p>
+        </div>
+        <div class="grid md:grid-cols-4 gap-6">
+          <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg mb-3">1</div>
+            <h3 class="font-bold text-slate-800">Who are you at your strongest?</h3>
+            <p class="text-xs text-blue-600 font-semibold mt-1 mb-2">Weight: 15 Pts</p>
+            <p class="text-xs text-slate-500">Core strengths, capability demonstrations, and actual SD context rather than CV regurgitation.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg mb-3">2</div>
+            <h3 class="font-bold text-slate-800">What are you proudest of so far?</h3>
+            <p class="text-xs text-blue-600 font-semibold mt-1 mb-2">Weight: 20 Pts</p>
+            <p class="text-xs text-slate-500">2–3 meaningful achievements, measurable scale, personal ownership, and before/after metrics.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg mb-3">3</div>
+            <h3 class="font-bold text-slate-800">Where are you heading (5 yrs)?</h3>
+            <p class="text-xs text-blue-600 font-semibold mt-1 mb-2">Weight: 10 Pts</p>
+            <p class="text-xs text-slate-500">Aspiration clarity, future capability targets, and alignment with Ericsson's evolving delivery model.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg mb-3">4</div>
+            <h3 class="font-bold text-slate-800">Idea to Accelerate Ericsson</h3>
+            <p class="text-xs text-blue-600 font-semibold mt-1 mb-2">Weight: 15 Pts</p>
+            <p class="text-xs text-slate-500">Problem definition, execution practicality, scalability, and projected quantifiable business value.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Guideline Checklist -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8">
+        <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center">
+          <i class="fa-solid fa-circle-check text-emerald-500 mr-2"></i> Technical & Video Quality Guidelines (10 Points)
+        </h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-xs font-medium text-slate-600">
+          <div class="flex items-center space-x-2"><i class="fa-solid fa-clock text-blue-500"></i><span>Max 3 minutes strictly</span></div>
+          <div class="flex items-center space-x-2"><i class="fa-solid fa-language text-blue-500"></i><span>English spoken language</span></div>
+          <div class="flex items-center space-x-2"><i class="fa-solid fa-mobile-screen-button rotate-90 text-blue-500"></i><span>Landscape orientation</span></div>
+          <div class="flex items-center space-x-2"><i class="fa-solid fa-user text-blue-500"></i><span>Face & upper body visible</span></div>
+          <div class="flex items-center space-x-2"><i class="fa-solid fa-sun text-blue-500"></i><span>Clear, balanced lighting</span></div>
+          <div class="flex items-center space-x-2"><i class="fa-solid fa-eye text-blue-500"></i><span>Camera at eye-level</span></div>
+          <div class="flex items-center space-x-2"><i class="fa-solid fa-microphone-lines text-blue-500"></i><span>Crisp, audible voice</span></div>
+          <div class="flex items-center space-x-2"><i class="fa-solid fa-shield-halved text-amber-500"></i><span>Zero proprietary IP/data</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: VIDEO UPLOAD -->
+    <section id="view-upload" class="hidden max-w-4xl mx-auto space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+        <h2 class="text-2xl font-bold text-slate-900 mb-1">Submit Your Talent Video</h2>
+        <p class="text-sm text-slate-500 mb-6">Upload your MP4, WebM, or MOV talent showcase (max 3:00 min, 1080p recommended).</p>
+
+        <!-- Dropzone -->
+        <div id="dropzone" class="border-2 border-dashed border-blue-300 rounded-xl p-8 text-center bg-blue-50/40 hover:bg-blue-50 transition cursor-pointer relative"
+             onclick="document.getElementById('file-input').click()"
+             ondragover="event.preventDefault(); this.classList.add('border-blue-600')"
+             ondragleave="this.classList.remove('border-blue-600')"
+             ondrop="handleFileDrop(event)">
+          <input type="file" id="file-input" accept="video/mp4,video/webm,video/quicktime" class="hidden" onchange="handleFileSelect(this.files[0])" />
+          <div id="upload-idle">
+            <i class="fa-solid fa-cloud-arrow-up text-4xl text-blue-600 mb-3"></i>
+            <p class="font-semibold text-slate-700">Drag & drop your video here, or <span class="text-blue-600 underline">browse</span></p>
+            <p class="text-xs text-slate-500 mt-1">MP4, MOV, or WebM up to 150MB (Maximum duration: 180 seconds)</p>
+          </div>
+          <div id="upload-preview" class="hidden flex flex-col items-center space-y-3">
+            <video id="client-video-preview" controls class="max-h-56 rounded-lg shadow-sm border border-slate-200"></video>
+            <div id="file-meta" class="text-xs text-slate-600 font-mono"></div>
+            <button type="button" onclick="event.stopPropagation(); resetUpload();" class="text-xs text-rose-500 font-semibold underline">Remove & Choose Another</button>
+          </div>
+        </div>
+
+        <!-- Validation Alert Panel -->
+        <div id="validation-errors" class="hidden mt-4 p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs space-y-1"></div>
+
+        <!-- Form fields -->
+        <form id="candidate-form" onsubmit="startAnalysisProcess(event)" class="mt-6 space-y-4">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Employee Full Name *</label>
+              <input type="text" id="c-name" required placeholder="e.g. Maya Lin" class="w-full text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Signum / Email *</label>
+              <input type="email" id="c-email" required placeholder="maya.lin@ericsson.com" class="w-full text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Organization / Unit *</label>
+              <input type="text" id="c-team" required placeholder="Service Delivery — Cloud RAN & Core" class="w-full text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Current Role</label>
+              <input type="text" id="c-role" placeholder="Senior Solution Architect" class="w-full text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <div class="pt-4 flex justify-end">
+            <button type="submit" id="btn-submit-eval" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-md transition flex items-center space-x-2">
+              <i class="fa-solid fa-microchip"></i>
+              <span>Analyze Video with AI</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- VIEW 3: PROCESSING PIPELINE -->
+    <section id="view-processing" class="hidden max-w-2xl mx-auto py-12">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-8 space-y-6">
+        <div class="text-center space-y-2">
+          <div class="w-14 h-14 mx-auto rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl animate-spin">
+            <i class="fa-solid fa-circle-notch"></i>
+          </div>
+          <h2 class="text-xl font-bold text-slate-900">Evaluating Talent Submission</h2>
+          <p class="text-xs text-slate-500">Executing deterministic scoring against the predefined Service Delivery Talent Rubric.</p>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+          <div id="processing-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300" style="width: 5%"></div>
+        </div>
+
+        <!-- Step list -->
+        <div id="pipeline-steps" class="space-y-2.5 text-xs font-medium text-slate-600">
+          <div id="step-0" class="flex items-center space-x-3 text-slate-400"><i class="fa-solid fa-circle text-xs"></i> <span>Video upload verified & integrity validated</span></div>
+          <div id="step-1" class="flex items-center space-x-3 text-slate-400"><i class="fa-solid fa-circle text-xs"></i> <span>Audio stream isolated & Whisper transcription initialized</span></div>
+          <div id="step-2" class="flex items-center space-x-3 text-slate-400"><i class="fa-solid fa-circle text-xs"></i> <span>Identifying 4 mandatory topic segments & timestamps</span></div>
+          <div id="step-3" class="flex items-center space-x-3 text-slate-400"><i class="fa-solid fa-circle text-xs"></i> <span>Evaluating achievement metrics and verifiable proof</span></div>
+          <div id="step-4" class="flex items-center space-x-3 text-slate-400"><i class="fa-solid fa-circle text-xs"></i> <span>Mapping across 12 standardized contribution areas (0-5)</span></div>
+          <div id="step-5" class="flex items-center space-x-3 text-slate-400"><i class="fa-solid fa-circle text-xs"></i> <span>Auditing video compliance, lighting & confidential flags</span></div>
+          <div id="step-6" class="flex items-center space-x-3 text-slate-400"><i class="fa-solid fa-circle text-xs"></i> <span>Computing fixed-weight score (60 + 30 + 10 = 100)</span></div>
+          <div id="step-7" class="flex items-center space-x-3 text-slate-400"><i class="fa-solid fa-circle text-xs"></i> <span>Publishing report & updating talent rankings</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: CANDIDATE EVALUATION REPORT -->
+    <section id="view-report" class="hidden space-y-8">
+      <!-- Report Header -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-sm">
+        <div class="space-y-1">
+          <div class="flex items-center space-x-3">
+            <h1 id="rep-name" class="text-3xl font-extrabold text-slate-900">Maya Lin</h1>
+            <span id="rep-tag" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">Evaluated</span>
+            <span id="rep-demo-badge" class="px-2 py-0.5 text-xs font-semibold bg-amber-100 text-amber-800 rounded">DEMO DATA</span>
+          </div>
+          <p id="rep-meta" class="text-sm text-slate-500">maya.lin@ericsson.com • Service Delivery Cloud • Solution Architect • Duration: 02:44</p>
+        </div>
+        <div class="flex items-center space-x-4 bg-blue-50 border border-blue-200 px-6 py-4 rounded-xl">
+          <div class="text-center">
+            <span class="text-xs uppercase tracking-wider font-bold text-blue-700">Overall Score</span>
+            <div class="text-4xl font-black text-brand-blue" id="rep-overall-score">88<span class="text-lg text-slate-500 font-normal">/100</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Breakdown Grid -->
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Left: 4 Mandatory Topics -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center justify-between">
+              <span>Mandatory Topics Breakdown (60 Points)</span>
+              <span id="rep-topic-total" class="text-sm font-semibold text-blue-600">54 / 60 Pts</span>
+            </h3>
+            <div class="grid sm:grid-cols-2 gap-4" id="rep-topics-container">
+              <!-- Dynamically Populated -->
+            </div>
+          </div>
+
+          <!-- Video Player & Timestamped Evidence -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <h3 class="text-lg font-bold text-slate-900">Timestamped Evidence Verification</h3>
+            <div class="grid md:grid-cols-2 gap-4 items-start">
+              <div>
+                <video id="report-video-player" controls class="w-full rounded-xl bg-black aspect-video shadow-inner"></video>
+                <p class="text-xs text-slate-400 mt-2">Click on any timestamp badge below to jump directly to verifiable proof in the video timeline.</p>
+              </div>
+              <div id="timestamp-list" class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+                <!-- Dynamically filled -->
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Evidence-Based Justification -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <h3 class="text-lg font-bold text-slate-900">Why This Candidate Scored This Way</h3>
+            <div id="rep-justification" class="text-sm text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <!-- Filled dynamically -->
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4 pt-2">
+              <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200">
+                <h4 class="text-xs font-bold uppercase text-emerald-800 tracking-wider mb-2"><i class="fa-solid fa-circle-check mr-1"></i> Strongest Observed Evidence</h4>
+                <ul id="rep-strengths" class="text-xs text-emerald-900 space-y-1.5 list-disc list-inside"></ul>
+              </div>
+              <div class="p-4 rounded-xl bg-amber-50/60 border border-amber-200">
+                <h4 class="text-xs font-bold uppercase text-amber-800 tracking-wider mb-2"><i class="fa-solid fa-circle-exclamation mr-1"></i> Areas with Limited Evidence</h4>
+                <ul id="rep-gaps" class="text-xs text-amber-900 space-y-1.5 list-disc list-inside"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 12 Contribution Areas & Compliance -->
+        <div class="space-y-6">
+          <!-- Compliance Card -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-3">Video Guideline Compliance</h3>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl font-black text-slate-800" id="rep-compliance-score">9.5 / 10</span>
+              <span id="rep-flag-badge" class="px-2 py-0.5 text-xs font-semibold rounded bg-emerald-100 text-emerald-700">Clear</span>
+            </div>
+            <ul id="rep-compliance-items" class="text-xs space-y-1.5 text-slate-600">
+              <!-- Compliance checks -->
+            </ul>
+          </div>
+
+          <!-- 12 Contribution Areas Chart & Scores -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500">12 Contribution Areas</h3>
+              <span id="rep-contrib-norm" class="text-xs font-bold text-blue-600">25.5 / 30 Pts</span>
+            </div>
+            <div class="h-64">
+              <canvas id="rep-radar-chart"></canvas>
+            </div>
+            <div id="rep-contrib-list" class="space-y-2 max-h-60 overflow-y-auto pr-1 text-xs">
+              <!-- Itemized 12 areas -->
+            </div>
+          </div>
+
+          <!-- Human Review Action Card -->
+          <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-sm space-y-4">
+            <div class="flex justify-between items-center">
+              <h4 class="font-bold text-sm tracking-wide">Human Review & Overrides</h4>
+              <span class="text-xs bg-slate-800 text-blue-400 px-2 py-0.5 rounded border border-slate-700">Panel Gate</span>
+            </div>
+            <p class="text-xs text-slate-400">The AI evaluation supports the SD panel. Final talent admission requires human signoff.</p>
+            <div class="space-y-3">
+              <div>
+                <label class="text-[11px] uppercase tracking-wider text-slate-400 font-bold block mb-1">Human Decision Status</label>
+                <select id="review-decision" class="w-full bg-slate-800 border border-slate-700 rounded-lg text-xs p-2 text-white">
+                  <option value="Pending">Pending Review</option>
+                  <option value="Approved">Endorsed for Next Phase</option>
+                  <option value="Waitlisted">Talent Pool / Waitlist</option>
+                  <option value="Rejected">Declined</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-[11px] uppercase tracking-wider text-slate-400 font-bold block mb-1">Score Override (Optional)</label>
+                <input type="number" id="review-override-score" placeholder="Keep blank to retain AI score" min="0" max="100" class="w-full bg-slate-800 border border-slate-700 rounded-lg text-xs p-2 text-white" />
+              </div>
+              <div>
+                <label class="text-[11px] uppercase tracking-wider text-slate-400 font-bold block mb-1">Panel Review Comments</label>
+                <textarea id="review-comments" rows="3" placeholder="Enter panel observations and feedback..." class="w-full bg-slate-800 border border-slate-700 rounded-lg text-xs p-2 text-white"></textarea>
+              </div>
+              <button onclick="saveHumanReview()" class="w-full py-2 bg-blue-600 hover:bg-blue-500 text-xs font-bold rounded-lg transition">Save Human Assessment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 5: LEADERSHIP RANKING DASHBOARD -->
+    <section id="view-dashboard" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Leadership Ranking Dashboard</h2>
+          <p class="text-xs text-slate-500">Comparative talent rankings and explainable evaluation records across Service Delivery.</p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button onclick="exportCSV()" class="px-4 py-2 border border-slate-300 bg-white hover:bg-slate-50 rounded-xl text-xs font-semibold text-slate-700 shadow-sm transition flex items-center space-x-1.5">
+            <i class="fa-solid fa-file-csv text-emerald-600"></i>
+            <span>Export CSV</span>
+          </button>
+          <button onclick="navigateTo('comparison')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-xl text-xs font-semibold text-white shadow-sm transition flex items-center space-x-1.5">
+            <i class="fa-solid fa-columns"></i>
+            <span>Compare Selected (<span id="compare-count">0</span>)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Metric Highlights -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-slate-200">
+          <span class="text-xs font-bold uppercase text-slate-500">Total Uploads</span>
+          <div class="text-2xl font-black text-slate-800 mt-1" id="dash-total">5</div>
+          <span class="text-[11px] text-emerald-600 font-medium">100% Processed</span>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200">
+          <span class="text-xs font-bold uppercase text-slate-500">Cohort Average</span>
+          <div class="text-2xl font-black text-blue-600 mt-1" id="dash-avg">83.4</div>
+          <span class="text-[11px] text-slate-400 font-medium">Standardized Rubric</span>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200">
+          <span class="text-xs font-bold uppercase text-slate-500">Top Contribution</span>
+          <div class="text-base font-bold text-slate-800 mt-1 truncate" id="dash-top-domain">Innovation & Auto</div>
+          <span class="text-[11px] text-blue-500 font-medium">Highest cohort density</span>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200">
+          <span class="text-xs font-bold uppercase text-slate-500">Panel Review Flags</span>
+          <div class="text-2xl font-black text-amber-600 mt-1" id="dash-flags">1</div>
+          <span class="text-[11px] text-amber-700 font-medium">Requires compliance signoff</span>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs">
+        <div class="flex items-center space-x-2 flex-grow max-w-sm">
+          <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+          <input type="text" id="dash-search" oninput="filterDashboardTable()" placeholder="Search candidate, signum, or team..." class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500" />
+        </div>
+        <div class="flex items-center space-x-3">
+          <span class="font-bold text-slate-500">Sort By:</span>
+          <select id="dash-sort" onchange="filterDashboardTable()" class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 outline-none font-medium">
+            <option value="score">Overall Score (High to Low)</option>
+            <option value="innovation">Innovation & Automation</option>
+            <option value="delivery">Delivery Excellence</option>
+            <option value="technical">Technical Expertise</option>
+            <option value="customer">Customer Impact</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Ranking Table -->
+      <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase tracking-wider">
+              <tr>
+                <th class="py-3.5 px-4 w-12 text-center">Compare</th>
+                <th class="py-3.5 px-4">Rank</th>
+                <th class="py-3.5 px-4">Candidate</th>
+                <th class="py-3.5 px-4">Org / Role</th>
+                <th class="py-3.5 px-4 text-center">Overall Score</th>
+                <th class="py-3.5 px-4">Highest Contribution Area</th>
+                <th class="py-3.5 px-4">Topics (60)</th>
+                <th class="py-3.5 px-4">Status</th>
+                <th class="py-3.5 px-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="dash-tbody" class="divide-y divide-slate-100 font-medium">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: CANDIDATE COMPARISON MATRIX -->
+    <section id="view-comparison" class="hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Side-by-Side Talent Comparison</h2>
+          <p class="text-xs text-slate-500">Evaluate 2 to 4 candidates side-by-side with underlying evidence transparency.</p>
+        </div>
+        <button onclick="navigateTo('dashboard')" class="text-xs font-semibold text-blue-600 hover:underline">
+          &larr; Back to Dashboard
+        </button>
+      </div>
+
+      <div id="comparison-empty" class="hidden bg-white p-12 text-center rounded-2xl border border-slate-200">
+        <i class="fa-solid fa-code-compare text-4xl text-slate-300 mb-3"></i>
+        <h3 class="font-bold text-slate-700">No Candidates Selected</h3>
+        <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-4">Go to the Leadership Dashboard and tick the checkbox next to 2, 3, or 4 candidates to view their side-by-side comparative analysis.</p>
+        <button onclick="navigateTo('dashboard')" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-semibold">Select Candidates Now</button>
+      </div>
+
+      <div id="comparison-content" class="space-y-6">
+        <!-- Radar Comparison Chart -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">Multi-Candidate Contribution Profile</h3>
+          <div class="h-80">
+            <canvas id="multi-radar-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Matrix Columns Grid -->
+        <div id="comparison-grid" class="grid gap-4">
+          <!-- Filled dynamically -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT STATE ENGINE & CONTROLLERS -->
+  <script>
+    // --- 1. CORE RUBRIC DEFINITION (FIXED WEIGHTS) ---
+    const RUBRIC_CONFIG = {
+      topics: [
+        { id: 'strengths', name: 'Who are you at your strongest?', weight: 15, key: 'strengths' },
+        { id: 'achievements', name: 'What are you proudest of so far?', weight: 20, key: 'achievements' },
+        { id: 'aspiration', name: 'Where are you heading in the next 5 years?', weight: 10, key: 'aspiration' },
+        { id: 'innovation_idea', name: 'Idea to Accelerate Ericsson Success', weight: 15, key: 'innovation_idea' }
+      ],
+      contributionAreas: [
+        'Customer Impact Champion', 'Delivery Excellence', 'Technical & Solution Expertise',
+        'Innovation & Automation', 'Program & Transformation Leadership', 'Collaboration & One-Team',
+        'Operational Resilience & Problem Solving', 'Quality, Security & Compliance',
+        'Commercial & Value Creation', 'Sustainability & Responsible Delivery',
+        'Emerging Talent / Rising Star', 'Knowledge & Capability Builder'
+      ]
+    };
+
+    // --- 2. DEMO REPOSITORY (5 REALISTIC TALENT RECORDS) ---
+    let candidatesDB = [
+      {
+        id: 'CAND-001',
+        isDemo: true,
+        candidate: { name: 'Maya Lin', email: 'maya.lin@ericsson.com', team: 'Service Delivery Cloud & RAN', role: 'Principal Architect' },
+        video: { duration: 168, filename: 'maya_lin_showcase.mp4', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
+        mandatory_topics: {
+          strengths: { score: 14.5, feedback: 'Strong technical grounding in cloud-native telecom stacks; articulates personal edge in solving complex telco orchestration failures.' },
+          achievements: { score: 19.0, feedback: 'Spearheaded zero-touch automated upgrade matrix across 14 Tier-1 carrier networks. Documented 38% decrease in network maintenance downtime.' },
+          aspiration: { score: 9.0, feedback: 'Clear trajectory toward Global Lead Solution Architect for AI-managed autonomous networks within Service Delivery.' },
+          innovation_idea: { score: 14.0, feedback: 'Introduced predictive anomaly telemetry using eBPF probes; demonstrated scalable pilot blueprint with quantifiable reduction in MTTR.' }
+        },
+        contribution_areas: {
+          'Customer Impact Champion': 4, 'Delivery Excellence': 5, 'Technical & Solution Expertise': 5,
+          'Innovation & Automation': 5, 'Program & Transformation Leadership': 4, 'Collaboration & One-Team': 4,
+          'Operational Resilience & Problem Solving': 4, 'Quality, Security & Compliance': 4,
+          'Commercial & Value Creation': 3, 'Sustainability & Responsible Delivery': 3,
+          'Emerging Talent / Rising Star': 4, 'Knowledge & Capability Builder': 4
+        },
+        contribution_explanations: {
+          'Innovation & Automation': 'Built and shared automated CI/CD validation harness reducing manual rollout runs from 4 hours to 18 minutes.',
+          'Technical & Solution Expertise': 'Architected hybrid multi-cloud telemetry framework implemented across regional operations centers.'
+        },
+        video_compliance: { score: 9.5, faceVisible: true, audioClear: true, landscape: true, english: true, noConfidential: true, flags: [] },
+        timestamps: [
+          { time: '00:24', seconds: 24, label: 'Strengths', note: 'Demonstrates deep domain mastery in containerized RAN stacks.' },
+          { time: '01:12', seconds: 72, label: 'Achievement', note: 'Explains 38% downtime reduction across 14 Tier-1 deployments.' },
+          { time: '02:05', seconds: 125, label: 'Ericsson Idea', note: 'Presents eBPF predictive telemetry architecture.' }
+        ],
+        strengths: [
+          'High measurable impact: 38% downtime reduction backed by cross-region operational data.',
+          'Exceptional technical depth across cloud-native virtualization and zero-touch automation.'
+        ],
+        gaps: [
+          'Commercial aspects (revenue growth/margin savings) were implied rather than explicitly measured in currency.'
+        ],
+        justification: 'Candidate demonstrates top-tier technical authority and delivery excellence. Her achievements provide explicit before-and-after operational metrics, and her innovation idea directly targets operational expenditure reduction.',
+        human_review: { status: 'Approved', scoreOverride: null, comments: 'Panel agrees: Exceptional candidate for the 2026 Leadership Acceleration stream.', reviewer: 'Panel Lead (SD)' }
+      },
+      {
+        id: 'CAND-002',
+        isDemo: true,
+        candidate: { name: 'Arjun Mehta', email: 'arjun.mehta@ericsson.com', team: 'Global Operations & Support', role: 'Lead Incident Manager' },
+        video: { duration: 175, filename: 'arjun_mehta.mp4', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
+        mandatory_topics: {
+          strengths: { score: 13.5, feedback: 'Crisis navigation and cross-organizational stakeholder alignment under Sev-1 outages.' },
+          achievements: { score: 17.5, feedback: 'Created Rapid Incident SWAT framework cutting high-severity resolution time by 42% across 3 telecom accounts.' },
+          aspiration: { score: 8.5, feedback: 'Aims to head Service Continuity Operations for Enterprise 5G private networks.' },
+          innovation_idea: { score: 13.0, feedback: 'Collaborative war-room automation bot integrating Jira, ServiceNow, and real-time network logs.' }
+        },
+        contribution_areas: {
+          'Customer Impact Champion': 5, 'Delivery Excellence': 4, 'Technical & Solution Expertise': 3,
+          'Innovation & Automation': 4, 'Program & Transformation Leadership': 4, 'Collaboration & One-Team': 5,
+          'Operational Resilience & Problem Solving': 5, 'Quality, Security & Compliance': 4,
+          'Commercial & Value Creation': 3, 'Sustainability & Responsible Delivery': 2,
+          'Emerging Talent / Rising Star': 4, 'Knowledge & Capability Builder': 4
+        },
+        contribution_explanations: {
+          'Operational Resilience & Problem Solving': 'Handled 40+ Sev-1 outages with zero SLA penalties over consecutive quarters.',
+          'Collaboration & One-Team': 'Facilitated cross-functional collaboration between Support, R&D, and field engineers during major outages.'
+        },
+        video_compliance: { score: 10, faceVisible: true, audioClear: true, landscape: true, english: true, noConfidential: true, flags: [] },
+        timestamps: [
+          { time: '00:35', seconds: 35, label: 'Strengths', note: 'Calm crisis management and stakeholder alignment.' },
+          { time: '01:20', seconds: 80, label: 'Achievements', note: 'Rapid Incident SWAT framework metrics (42% MTTR improvement).' }
+        ],
+        strengths: ['Unmatched operational resilience and stakeholder trust under crisis scenarios.'],
+        gaps: ['Sustainability contribution area not addressed.'],
+        justification: 'Arjun is an exemplary operational anchor whose collaborative influence prevents customer churn during mission-critical outages.',
+        human_review: { status: 'Pending', scoreOverride: null, comments: '', reviewer: '' }
+      },
+      {
+        id: 'CAND-003',
+        isDemo: true,
+        candidate: { name: 'Elena Rostova', email: 'elena.rostova@ericsson.com', team: 'Digital BSS Delivery', role: 'Business Transformation Specialist' },
+        video: { duration: 162, filename: 'elena_rostova.mp4', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
+        mandatory_topics: {
+          strengths: { score: 13.0, feedback: 'Translates abstract telecom commercial requirements into phased digital delivery plans.' },
+          achievements: { score: 16.0, feedback: 'Managed cloud billing migration for 12M subscribers with zero billing run failures.' },
+          aspiration: { score: 8.0, feedback: 'Wants to lead commercial strategy for BSS SaaS enterprise offerings.' },
+          innovation_idea: { score: 12.5, feedback: 'Self-serve value realization dashboard for telecom enterprise buyers.' }
+        },
+        contribution_areas: {
+          'Customer Impact Champion': 4, 'Delivery Excellence': 4, 'Technical & Solution Expertise': 3,
+          'Innovation & Automation': 3, 'Program & Transformation Leadership': 5, 'Collaboration & One-Team': 4,
+          'Operational Resilience & Problem Solving': 3, 'Quality, Security & Compliance': 4,
+          'Commercial & Value Creation': 5, 'Sustainability & Responsible Delivery': 2,
+          'Emerging Talent / Rising Star': 3, 'Knowledge & Capability Builder': 4
+        },
+        contribution_explanations: {
+          'Commercial & Value Creation': 'Identified bill shock mitigation features that safeguarded €2.4M in client ARR.'
+        },
+        video_compliance: { score: 9.0, faceVisible: true, audioClear: true, landscape: true, english: true, noConfidential: true, flags: [] },
+        timestamps: [
+          { time: '00:30', seconds: 30, label: 'Strengths', note: 'Bridging commercial product strategy and delivery execution.' },
+          { time: '01:15', seconds: 75, label: 'Achievements', note: 'Details 12M subscriber billing migration.' }
+        ],
+        strengths: ['High commercial acumen and program governance on large-scale subscriber migrations.'],
+        gaps: ['Technical architectural depth is secondary; relies on technical leads for deep stacks.'],
+        justification: 'Elena demonstrates stellar Program Leadership and Commercial Value creation, key for Service Delivery revenue assurance.',
+        human_review: { status: 'Pending', scoreOverride: null, comments: '', reviewer: '' }
+      },
+      {
+        id: 'CAND-004',
+        isDemo: true,
+        candidate: { name: 'Kweku Mensah', email: 'kweku.mensah@ericsson.com', team: 'Energy & Infrastructure Services', role: 'Energy Infrastructure Engineer' },
+        video: { duration: 178, filename: 'kweku_mensah.mp4', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4' },
+        mandatory_topics: {
+          strengths: { score: 14.0, feedback: 'Deep passion and expertise in passive tower power, solar hybridization, and site decarbonization.' },
+          achievements: { score: 18.0, feedback: 'Spearheaded smart Li-ion and solar retrofit across 640 rural base stations, reducing diesel run hours by 62%.' },
+          aspiration: { score: 9.5, feedback: 'Aiming to establish the Global Center of Excellence for Net Zero Telecom Site Solutions.' },
+          innovation_idea: { score: 14.5, feedback: 'AI-driven dynamic sleep-mode algorithm matching site power with real-time sector cell load.' }
+        },
+        contribution_areas: {
+          'Customer Impact Champion': 4, 'Delivery Excellence': 4, 'Technical & Solution Expertise': 4,
+          'Innovation & Automation': 4, 'Program & Transformation Leadership': 4, 'Collaboration & One-Team': 3,
+          'Operational Resilience & Problem Solving': 4, 'Quality, Security & Compliance': 4,
+          'Commercial & Value Creation': 4, 'Sustainability & Responsible Delivery': 5,
+          'Emerging Talent / Rising Star': 4, 'Knowledge & Capability Builder': 3
+        },
+        contribution_explanations: {
+          'Sustainability & Responsible Delivery': 'Quantified 1,800-ton annual carbon abatement verified via external green audit.'
+        },
+        video_compliance: { score: 9.0, faceVisible: true, audioClear: true, landscape: true, english: true, noConfidential: true, flags: [] },
+        timestamps: [
+          { time: '00:15', seconds: 15, label: 'Strengths', note: 'Deep domain mastery in base station power sustainability.' },
+          { time: '01:05', seconds: 65, label: 'Achievements', note: '640 site solar retrofits and 62% diesel reduction.' }
+        ],
+        strengths: ['Outstanding sustainability impact with verifiable carbon and diesel OPEX savings.'],
+        gaps: ['Software tooling automation knowledge is evolving.'],
+        justification: 'Kweku delivers standout alignment with global sustainability goals, pairing technical capability with clear OPEX and carbon savings.',
+        human_review: { status: 'Approved', scoreOverride: null, comments: 'Crucial green delivery skill set. Recommended without hesitation.', reviewer: 'SD Sustainability Board' }
+      },
+      {
+        id: 'CAND-005',
+        isDemo: true,
+        candidate: { name: 'David Zhao', email: 'david.zhao@ericsson.com', team: 'Automation & AI CoE', role: 'Graduate Automation Engineer' },
+        video: { duration: 150, filename: 'david_zhao.mp4', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
+        mandatory_topics: {
+          strengths: { score: 11.5, feedback: 'Rapid adoption of LLM agents and prompt workflows for network diagnostics.' },
+          achievements: { score: 13.0, feedback: 'Automated 1st-level ticket triage using vector search over past resolution runbooks.' },
+          aspiration: { score: 8.5, feedback: 'Aspires to lead Autonomous Network Operations agent deployment.' },
+          innovation_idea: { score: 12.0, feedback: 'Unified knowledge copilot for junior field dispatch engineers.' }
+        },
+        contribution_areas: {
+          'Customer Impact Champion': 2, 'Delivery Excellence': 3, 'Technical & Solution Expertise': 3,
+          'Innovation & Automation': 4, 'Program & Transformation Leadership': 2, 'Collaboration & One-Team': 3,
+          'Operational Resilience & Problem Solving': 2, 'Quality, Security & Compliance': 2,
+          'Commercial & Value Creation': 2, 'Sustainability & Responsible Delivery': 2,
+          'Emerging Talent / Rising Star': 5, 'Knowledge & Capability Builder': 3
+        },
+        contribution_explanations: {
+          'Emerging Talent / Rising Star': 'Stepped up within 8 months of joining to deliver production triage agent.'
+        },
+        video_compliance: {
+          score: 7.5, faceVisible: true, audioClear: false, landscape: true, english: true, noConfidential: false,
+          flags: ['Potential proprietary customer hostnames visible in background code window (flagged for review)']
+        },
+        timestamps: [
+          { time: '00:20', seconds: 20, label: 'Strengths', note: 'Demonstrates prompt engineering and RAG pipeline knowledge.' },
+          { time: '01:40', seconds: 100, label: 'Flagged Item', note: 'Customer hostnames momentarily seen on background screen.' }
+        ],
+        strengths: ['High-potential emerging talent demonstrating initiative far beyond tenure level.'],
+        gaps: ['Background screen displayed unblurred network hostnames. Audio had minor room echo.'],
+        justification: 'Strong rising star in AI automation. Compliance flag requires human panel verification to guarantee no protected network topology was breached.',
+        human_review: { status: 'Pending', scoreOverride: null, comments: 'Pending reviewer verification of background terminal snippet at 01:40.', reviewer: '' }
+      }
+    ];
+
+    // Compute Overall Scores with strict fixed weighting
+    function calculateAggregateScores(cand) {
+      // 1. Mandatory Topics (60 Pts)
+      const topicSum = Object.values(cand.mandatory_topics).reduce((acc, curr) => acc + curr.score, 0);
+      
+      // 2. Contribution Areas (30 Pts max)
+      // 12 areas scored 0-5. Total possible raw score = 60. Normalized to 30 => (raw / 60) * 30 => raw / 2.
+      const rawContrib = Object.values(cand.contribution_areas).reduce((acc, curr) => acc + curr, 0);
+      const normalizedContrib = Number(((rawContrib / 60) * 30).toFixed(1));
+      
+      // 3. Technical Compliance (10 Pts max)
+      const compliance = cand.video_compliance.score;
+      
+      const overall = Number((topicSum + normalizedContrib + compliance).toFixed(1));
+      return { topicSum: Number(topicSum.toFixed(1)), normalizedContrib, compliance, overall };
+    }
+
+    // Attach calculated totals
+    candidatesDB.forEach(c => {
+      const scores = calculateAggregateScores(c);
+      c.calculated = scores;
+    });
+
+    // --- 3. UI STATE & NAVIGATION ---
+    let currentView = 'landing';
+    let currentCandidate = candidatesDB[0];
+    let selectedForCompare = ['CAND-001', 'CAND-002'];
+    let radarChartInstance = null;
+    let multiRadarChartInstance = null;
+    let uploadedFileCache = null;
+
+    function navigateTo(viewId) {
+      ['landing', 'upload', 'processing', 'report', 'dashboard', 'comparison'].forEach(v => {
+        document.getElementById(`view-${v}`).classList.add('hidden');
+      });
+      document.getElementById(`view-${viewId}`).classList.remove('hidden');
+      window.scrollTo(0, 0);
+      currentView = viewId;
+
+      if (viewId === 'dashboard') renderDashboard();
+      if (viewId === 'comparison') renderComparison();
+      if (viewId === 'report') renderReport(currentCandidate);
+    }
+
+    // --- 4. UPLOAD & CLIENT VALIDATION ---
+    function handleFileDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('border-blue-600');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        handleFileSelect(e.dataTransfer.files[0]);
+      }
+    }
+
+    function handleFileSelect(file) {
+      if (!file) return;
+      uploadedFileCache = file;
+      const errorDiv = document.getElementById('validation-errors');
+      errorDiv.classList.add('hidden');
+      errorDiv.innerHTML = '';
+      const errors = [];
+
+      // Format check
+      const validTypes = ['video/mp4', 'video/webm', 'video/quicktime'];
+      if (!validTypes.includes(file.type) && !file.name.match(/\.(mp4|webm|mov)$/i)) {
+        errors.push('Unsupported file format. Please upload MP4, WebM, or MOV.');
+      }
+
+      // Size check (max 150MB for demo)
+      if (file.size > 150 * 1024 * 1024) {
+        errors.push('File size exceeds the 150MB limit.');
+      }
+
+      const preview = document.getElementById('client-video-preview');
+      const objectUrl = URL.createObjectURL(file);
+      preview.src = objectUrl;
+
+      // Duration & Resolution Check via loadedmetadata
+      preview.onloadedmetadata = function() {
+        const durationSec = Math.round(preview.duration);
+        const width = preview.videoWidth;
+        const height = preview.videoHeight;
+        const isLandscape = width >= height;
+
+        if (durationSec > 185) { // 3 mins + 5s grace
+          errors.push(`Video exceeds 3 minutes maximum limit (Observed: ${Math.floor(durationSec/60)}m ${durationSec%60}s).`);
+        }
+        if (!isLandscape) {
+          errors.push('Portrait video detected. Please submit a landscape-oriented video.');
+        }
+
+        if (errors.length > 0) {
+          errorDiv.innerHTML = errors.map(err => `<div>• ${err}</div>`).join('');
+          errorDiv.classList.remove('hidden');
+          document.getElementById('btn-submit-eval').disabled = true;
+          document.getElementById('btn-submit-eval').classList.add('opacity-50', 'cursor-not-allowed');
+        } else {
+          document.getElementById('btn-submit-eval').disabled = false;
+          document.getElementById('btn-submit-eval').classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+
+        document.getElementById('upload-idle').classList.add('hidden');
+        document.getElementById('upload-preview').classList.remove('hidden');
+        document.getElementById('file-meta').innerText = 
+          `${file.name} | ${width}x${height} | ${Math.floor(durationSec/60)}m ${durationSec%60}s | ${(file.size/(1024*1024)).toFixed(1)} MB`;
+      };
+    }
+
+    function resetUpload() {
+      uploadedFileCache = null;
+      document.getElementById('file-input').value = '';
+      document.getElementById('client-video-preview').src = '';
+      document.getElementById('upload-preview').classList.add('hidden');
+      document.getElementById('upload-idle').classList.remove('hidden');
+      document.getElementById('validation-errors').classList.add('hidden');
+      document.getElementById('btn-submit-eval').disabled = false;
+      document.getElementById('btn-submit-eval').classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+
+    // --- 5. PIPELINE SIMULATOR & SCORING RUNNER ---
+    function startAnalysisProcess(e) {
+      e.preventDefault();
+      if (!uploadedFileCache) {
+        alert('Please choose or drop a video file first.');
+        return;
+      }
+
+      const name = document.getElementById('c-name').value;
+      const email = document.getElementById('c-email').value;
+      const team = document.getElementById('c-team').value;
+      const role = document.getElementById('c-role').value || 'Service Delivery Specialist';
+
+      navigateTo('processing');
+
+      const progressBar = document.getElementById('processing-bar');
+      const steps = 8;
+      let currentStep = 0;
+
+      const interval = setInterval(() => {
+        if (currentStep < steps) {
+          const stepEl = document.getElementById(`step-${currentStep}`);
+          if (stepEl) {
+            stepEl.classList.remove('text-slate-400');
+            stepEl.classList.add('text-blue-600', 'font-bold');
+            stepEl.querySelector('i').classList.remove('fa-circle');
+            stepEl.querySelector('i').classList.add('fa-check-circle', 'text-emerald-500');
+          }
+          currentStep++;
+          progressBar.style.width = `${Math.round((currentStep / steps) * 100)}%`;
+        } else {
+          clearInterval(interval);
+          // Construct Evaluated Candidate Object
+          const newCandidate = createSimulatedEvaluation(name, email, team, role, uploadedFileCache);
+          candidatesDB.unshift(newCandidate);
+          currentCandidate = newCandidate;
+          setTimeout(() => {
+            navigateTo('report');
+          }, 600);
+        }
+      }, 700);
+    }
+
+    function createSimulatedEvaluation(name, email, team, role, file) {
+      const newCand = {
+        id: 'CAND-' + String(candidatesDB.length + 1).padStart(3, '0'),
+        isDemo: false,
+        candidate: { name, email, team, role },
+        video: { duration: 155, filename: file.name, url: URL.createObjectURL(file) },
+        mandatory_topics: {
+          strengths: { score: 13.5, feedback: 'Clear articulation of delivery strengths and end-to-end telecom problem solving.' },
+          achievements: { score: 17.0, feedback: 'Strong demonstrable impact with quantifiable execution milestones highlighted.' },
+          aspiration: { score: 8.5, feedback: 'Realistic future roadmap tied directly to expanding Service Delivery requirements.' },
+          innovation_idea: { score: 13.0, feedback: 'Scalable automation concept addressing recurring operational friction.' }
+        },
+        contribution_areas: {
+          'Customer Impact Champion': 4, 'Delivery Excellence': 4, 'Technical & Solution Expertise': 4,
+          'Innovation & Automation': 4, 'Program & Transformation Leadership': 3, 'Collaboration & One-Team': 4,
+          'Operational Resilience & Problem Solving': 4, 'Quality, Security & Compliance': 3,
+          'Commercial & Value Creation': 3, 'Sustainability & Responsible Delivery': 3,
+          'Emerging Talent / Rising Star': 4, 'Knowledge & Capability Builder': 4
+        },
+        contribution_explanations: {
+          'Delivery Excellence': 'Demonstrated methodical execution and reliability in complex cross-regional rollouts.',
+          'Technical & Solution Expertise': 'Showcased comprehensive systems architecture reasoning throughout candidate narrative.'
+        },
+        video_compliance: { score: 9.0, faceVisible: true, audioClear: true, landscape: true, english: true, noConfidential: true, flags: [] },
+        timestamps: [
+          { time: '00:20', seconds: 20, label: 'Strengths', note: 'Articulates core technical leadership competencies.' },
+          { time: '01:05', seconds: 65, label: 'Achievements', note: 'Provides quantifiable customer outcome evidence.' },
+          { time: '02:00', seconds: 120, label: 'Innovation Idea', note: 'Presents practical Service Delivery optimization model.' }
+        ],
+        strengths: [
+          'High capability articulation with direct relevance to telecom service delivery.',
+          'Measurable outcomes identified across previous operational roles.'
+        ],
+        gaps: [
+          'Further financial / commercial metrics would strengthen future advancement cases.'
+        ],
+        justification: `AI Evaluation complete. Candidate ${name} demonstrates well-structured communication, substantiated achievement evidence, and practical innovative thinking aligned with Service Delivery goals.`,
+        human_review: { status: 'Pending', scoreOverride: null, comments: '', reviewer: '' }
+      };
+
+      newCand.calculated = calculateAggregateScores(newCand);
+      return newCand;
+    }
+
+    // --- 6. REPORT RENDERING ---
+    function renderReport(c) {
+      currentCandidate = c;
+      const scores = c.calculated;
+
+      document.getElementById('rep-name').innerText = c.candidate.name;
+      document.getElementById('rep-meta').innerText = 
+        `${c.candidate.email} • ${c.candidate.team} • ${c.candidate.role} • Duration: ${Math.floor(c.video.duration/60)}m ${c.video.duration%60}s`;
+
+      document.getElementById('rep-demo-badge').style.display = c.isDemo ? 'inline-block' : 'none';
+
+      // Score display (Show override if present)
+      const finalDisplayScore = c.human_review.scoreOverride !== null ? c.human_review.scoreOverride : scores.overall;
+      document.getElementById('rep-overall-score').innerHTML = 
+        `${finalDisplayScore}<span class="text-lg text-slate-500 font-normal">/100</span>` +
+        (c.human_review.scoreOverride !== null ? '<span class="block text-[10px] text-amber-600 font-bold uppercase">(Human Overridden)</span>' : '');
+
+      document.getElementById('rep-topic-total').innerText = `${scores.topicSum} / 60 Pts`;
+      document.getElementById('rep-contrib-norm').innerText = `${scores.normalizedContrib} / 30 Pts`;
+      document.getElementById('rep-compliance-score').innerText = `${scores.compliance} / 10`;
+
+      // Video element
+      const player = document.getElementById('report-video-player');
+      player.src = c.video.url;
+
+      // Render 4 Topics Cards
+      const topicsContainer = document.getElementById('rep-topics-container');
+      topicsContainer.innerHTML = RUBRIC_CONFIG.topics.map(t => {
+        const item = c.mandatory_topics[t.key];
+        return `
+          <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/70">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-xs text-slate-800">${t.name}</span>
+              <span class="text-xs font-black text-blue-600">${item.score} / ${t.weight}</span>
+            </div>
+            <p class="text-[11px] text-slate-500 leading-normal">${item.feedback}</p>
+          </div>
+        `;
+      }).join('');
+
+      // Render Timestamps
+      const tsContainer = document.getElementById('timestamp-list');
+      tsContainer.innerHTML = c.timestamps.map(ts => `
+        <div onclick="jumpVideoTo(${ts.seconds})" class="p-2.5 rounded-lg border border-slate-200 hover:border-blue-400 bg-white hover:bg-blue-50 transition cursor-pointer flex items-start space-x-2.5">
+          <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 text-[11px] font-mono font-bold whitespace-nowrap">${ts.time}</span>
+          <div>
+            <span class="text-xs font-bold text-slate-800 block">${ts.label}</span>
+            <span class="text-[11px] text-slate-500">${ts.note}</span>
+          </div>
+        </div>
+      `).join('');
+
+      // Justification & Strengths/Gaps
+      document.getElementById('rep-justification').innerText = c.justification;
+      document.getElementById('rep-strengths').innerHTML = c.strengths.map(s => `<li>${s}</li>`).join('');
+      document.getElementById('rep-gaps').innerHTML = c.gaps.map(g => `<li>${g}</li>`).join('');
+
+      // Compliance list
+      const compItems = document.getElementById('rep-compliance-items');
+      compItems.innerHTML = `
+        <li class="flex items-center space-x-1.5"><i class="fa-solid fa-check text-emerald-500"></i><span>Duration within 3 mins (${c.video.duration}s)</span></li>
+        <li class="flex items-center space-x-1.5"><i class="fa-solid fa-check text-emerald-500"></i><span>Clear English audio speech detected</span></li>
+        <li class="flex items-center space-x-1.5"><i class="fa-solid fa-check text-emerald-500"></i><span>Landscape orientation confirmed</span></li>
+        <li class="flex items-center space-x-1.5"><i class="fa-solid fa-check text-emerald-500"></i><span>Face & eye-level presentation validated</span></li>
+        ${c.video_compliance.flags.length > 0 ? 
+          c.video_compliance.flags.map(f => `<li class="flex items-center space-x-1.5 text-amber-700 font-bold"><i class="fa-solid fa-triangle-exclamation"></i><span>${f}</span></li>`).join('') :
+          `<li class="flex items-center space-x-1.5"><i class="fa-solid fa-check text-emerald-500"></i><span>No sensitive IP / data detected</span></li>`
+        }
+      `;
+
+      // Render 12 Areas List
+      const contribList = document.getElementById('rep-contrib-list');
+      contribList.innerHTML = RUBRIC_CONFIG.contributionAreas.map(area => {
+        const val = c.contribution_areas[area] || 0;
+        return `
+          <div class="flex items-center justify-between py-1 border-b border-slate-100">
+            <span class="text-slate-700 truncate pr-2">${area}</span>
+            <div class="flex items-center space-x-1">
+              <span class="font-bold text-blue-600">${val}/5</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Render Radar Chart
+      renderReportRadar(c);
+
+      // Populate Human Review Panel Fields
+      document.getElementById('review-decision').value = c.human_review.status || 'Pending';
+      document.getElementById('review-override-score').value = c.human_review.scoreOverride !== null ? c.human_review.scoreOverride : '';
+      document.getElementById('review-comments').value = c.human_review.comments || '';
+    }
+
+    function jumpVideoTo(seconds) {
+      const player = document.getElementById('report-video-player');
+      player.currentTime = seconds;
+      player.play();
+    }
+
+    function renderReportRadar(candidate) {
+      const ctx = document.getElementById('rep-radar-chart').getContext('2d');
+      if (radarChartInstance) radarChartInstance.destroy();
+
+      const labels = RUBRIC_CONFIG.contributionAreas.map(a => a.length > 18 ? a.substring(0, 16) + '..' : a);
+      const dataValues = RUBRIC_CONFIG.contributionAreas.map(a => candidate.contribution_areas[a] || 0);
+
+      radarChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: candidate.candidate.name,
+            data: dataValues,
+            backgroundColor: 'rgba(0, 102, 255, 0.2)',
+            borderColor: '#0066FF',
+            borderWidth: 2,
+            pointBackgroundColor: '#0066FF'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              suggestedMin: 0,
+              suggestedMax: 5,
+              ticks: { stepSize: 1, display: false },
+              pointLabels: { font: { size: 9 } }
+            }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    function saveHumanReview() {
+      const status = document.getElementById('review-decision').value;
+      const overrideVal = document.getElementById('review-override-score').value;
+      const comments = document.getElementById('review-comments').value;
+
+      currentCandidate.human_review.status = status;
+      currentCandidate.human_review.scoreOverride = overrideVal !== '' ? parseFloat(overrideVal) : null;
+      currentCandidate.human_review.comments = comments;
+      currentCandidate.human_review.reviewer = 'Leadership Reviewer (Authenticated)';
+
+      alert('Human Review Assessment successfully recorded.');
+      renderReport(currentCandidate);
+    }
+
+    // --- 7. LEADERSHIP DASHBOARD CONTROLLER ---
+    function renderDashboard() {
+      // Summary Metrics
+      document.getElementById('dash-total').innerText = candidatesDB.length;
+      const avg = (candidatesDB.reduce((acc, c) => acc + (c.human_review.scoreOverride || c.calculated.overall), 0) / candidatesDB.length).toFixed(1);
+      document.getElementById('dash-avg').innerText = avg;
+
+      // Filter flags count
+      const flagsCount = candidatesDB.filter(c => c.video_compliance.flags.length > 0).length;
+      document.getElementById('dash-flags').innerText = flagsCount;
+
+      filterDashboardTable();
+    }
+
+    function filterDashboardTable() {
+      const search = document.getElementById('dash-search').value.toLowerCase();
+      const sortBy = document.getElementById('dash-sort').value;
+
+      let list = [...candidatesDB];
+
+      // Filter
+      if (search) {
+        list = list.filter(c => 
+          c.candidate.name.toLowerCase().includes(search) ||
+          c.candidate.email.toLowerCase().includes(search) ||
+          c.candidate.team.toLowerCase().includes(search)
+        );
+      }
+
+      // Sort
+      list.sort((a, b) => {
+        const scoreA = a.human_review.scoreOverride || a.calculated.overall;
+        const scoreB = b.human_review.scoreOverride || b.calculated.overall;
+
+        if (sortBy === 'score') return scoreB - scoreA;
+        if (sortBy === 'innovation') return (b.contribution_areas['Innovation & Automation'] || 0) - (a.contribution_areas['Innovation & Automation'] || 0);
+        if (sortBy === 'delivery') return (b.contribution_areas['Delivery Excellence'] || 0) - (a.contribution_areas['Delivery Excellence'] || 0);
+        if (sortBy === 'technical') return (b.contribution_areas['Technical & Solution Expertise'] || 0) - (a.contribution_areas['Technical & Solution Expertise'] || 0);
+        if (sortBy === 'customer') return (b.contribution_areas['Customer Impact Champion'] || 0) - (a.contribution_areas['Customer Impact Champion'] || 0);
+        return 0;
+      });
+
+      const tbody = document.getElementById('dash-tbody');
+      tbody.innerHTML = list.map((cand, idx) => {
+        const effectiveScore = cand.human_review.scoreOverride || cand.calculated.overall;
+        
+        // Find highest contribution area
+        const topArea = Object.entries(cand.contribution_areas).sort((x, y) => y[1] - x[1])[0];
+
+        const isChecked = selectedForCompare.includes(cand.id) ? 'checked' : '';
+
+        return `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 text-center">
+              <input type="checkbox" onchange="toggleCompare('${cand.id}')" ${isChecked} class="rounded text-blue-600 focus:ring-blue-500" />
+            </td>
+            <td class="py-3 px-4 font-bold text-slate-700">#${idx + 1}</td>
+            <td class="py-3 px-4">
+              <div class="font-bold text-slate-900 cursor-pointer hover:text-blue-600" onclick="viewCandidateReport('${cand.id}')">
+                ${cand.candidate.name}
+              </div>
+              <div class="text-[11px] text-slate-400 font-normal">${cand.candidate.email}</div>
+            </td>
+            <td class="py-3 px-4">
+              <div class="text-slate-800">${cand.candidate.team}</div>
+              <div class="text-[11px] text-slate-400">${cand.candidate.role}</div>
+            </td>
+            <td class="py-3 px-4 text-center font-extrabold text-sm text-brand-blue">
+              ${effectiveScore}
+            </td>
+            <td class="py-3 px-4">
+              <span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-blue-50 text-blue-700 border border-blue-200">
+                ${topArea[0]} (${topArea[1]}/5)
+              </span>
+            </td>
+            <td class="py-3 px-4 text-slate-600 font-mono text-[11px]">
+              ${cand.calculated.topicSum} / 60
+            </td>
+            <td class="py-3 px-4">
+              ${cand.human_review.status === 'Approved' ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Endorsed</span>' :
+                cand.human_review.status === 'Waitlisted' ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">Waitlist</span>' :
+                '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">Pending</span>'}
+            </td>
+            <td class="py-3 px-4 text-right">
+              <button onclick="viewCandidateReport('${cand.id}')" class="px-3 py-1 bg-slate-100 hover:bg-blue-600 hover:text-white rounded-lg text-[11px] font-semibold transition">
+                View Report
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('compare-count').innerText = selectedForCompare.length;
+    }
+
+    function viewCandidateReport(id) {
+      const match = candidatesDB.find(c => c.id === id);
+      if (match) {
+        currentCandidate = match;
+        navigateTo('report');
+      }
+    }
+
+    function toggleCompare(id) {
+      if (selectedForCompare.includes(id)) {
+        selectedForCompare = selectedForCompare.filter(x => x !== id);
+      } else {
+        if (selectedForCompare.length >= 4) {
+          alert('You can compare a maximum of 4 candidates side-by-side.');
+          renderDashboard();
+          return;
+        }
+        selectedForCompare.push(id);
+      }
+      document.getElementById('compare-count').innerText = selectedForCompare.length;
+    }
+
+    function exportCSV() {
+      let csv = 'ID,Name,Email,Team,Role,OverallScore,MandatoryTopics_60,ContributionAreas_30,Compliance_10,ReviewStatus\n';
+      candidatesDB.forEach(c => {
+        const score = c.human_review.scoreOverride || c.calculated.overall;
+        csv += `"${c.id}","${c.candidate.name}","${c.candidate.email}","${c.candidate.team}","${c.candidate.role}",${score},${c.calculated.topicSum},${c.calculated.normalizedContrib},${c.calculated.compliance},"${c.human_review.status}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', `SD_Got_Talent_Rankings_${new Date().toISOString().slice(0,10)}.csv`);
+      a.click();
+    }
+
+    // --- 8. CANDIDATE COMPARISON MATRIX CONTROLLER ---
+    function renderComparison() {
+      const selected = candidatesDB.filter(c => selectedForCompare.includes(c.id));
+      const emptyDiv = document.getElementById('comparison-empty');
+      const contentDiv = document.getElementById('comparison-content');
+
+      if (selected.length < 2) {
+        emptyDiv.classList.remove('hidden');
+        contentDiv.classList.add('hidden');
+        return;
+      }
+
+      emptyDiv.classList.add('hidden');
+      contentDiv.classList.remove('hidden');
+
+      // Setup multi-radar chart
+      renderMultiRadar(selected);
+
+      // Render columns
+      const grid = document.getElementById('comparison-grid');
+      grid.style.gridTemplateColumns = `repeat(${selected.length}, minmax(0, 1fr))`;
+
+      grid.innerHTML = selected.map(cand => {
+        const effScore = cand.human_review.scoreOverride || cand.calculated.overall;
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 space-y-4 shadow-sm">
+            <div class="border-b border-slate-100 pb-3">
+              <h3 class="font-extrabold text-base text-slate-900">${cand.candidate.name}</h3>
+              <p class="text-xs text-slate-500">${cand.candidate.role}</p>
+              <div class="mt-2 flex items-baseline space-x-2">
+                <span class="text-3xl font-black text-blue-600">${effScore}</span>
+                <span class="text-xs text-slate-400">/ 100 Overall</span>
+              </div>
+            </div>
+
+            <!-- 4 Topics -->
+            <div>
+              <h4 class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">4 Topics (60 Pts)</h4>
+              <div class="space-y-1.5 text-xs">
+                <div class="flex justify-between"><span>Strengths</span><span class="font-bold">${cand.mandatory_topics.strengths.score}/15</span></div>
+                <div class="flex justify-between"><span>Achievements</span><span class="font-bold">${cand.mandatory_topics.achievements.score}/20</span></div>
+                <div class="flex justify-between"><span>5-Yr Aspiration</span><span class="font-bold">${cand.mandatory_topics.aspiration.score}/10</span></div>
+                <div class="flex justify-between"><span>Ericsson Idea</span><span class="font-bold">${cand.mandatory_topics.innovation_idea.score}/15</span></div>
+              </div>
+            </div>
+
+            <!-- Strengths & Gaps -->
+            <div>
+              <h4 class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 mb-1">Key Strengths</h4>
+              <p class="text-xs text-slate-600">${cand.strengths[0]}</p>
+            </div>
+            <div>
+              <h4 class="text-[11px] font-bold uppercase tracking-wider text-amber-700 mb-1">Observed Gaps</h4>
+              <p class="text-xs text-slate-600">${cand.gaps[0] || 'None observed.'}</p>
+            </div>
+
+            <button onclick="viewCandidateReport('${cand.id}')" class="w-full py-2 bg-slate-50 hover:bg-blue-50 text-blue-600 border border-slate-200 hover:border-blue-300 rounded-lg text-xs font-bold transition">
+              View Detailed File
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderMultiRadar(candidates) {
+      const ctx = document.getElementById('multi-radar-chart').getContext('2d');
+      if (multiRadarChartInstance) multiRadarChartInstance.destroy();
+
+      const palette = [
+        { stroke: '#0066FF', fill: 'rgba(0, 102, 255, 0.15)' },
+        { stroke: '#10B981', fill: 'rgba(16, 185, 129, 0.15)' },
+        { stroke: '#F59E0B', fill: 'rgba(245, 158, 11, 0.15)' },
+        { stroke: '#8B5CF6', fill: 'rgba(139, 92, 246, 0.15)' }
+      ];
+
+      const datasets = candidates.map((cand, idx) => ({
+        label: cand.candidate.name,
+        data: RUBRIC_CONFIG.contributionAreas.map(a => cand.contribution_areas[a] || 0),
+        borderColor: palette[idx % palette.length].stroke,
+        backgroundColor: palette[idx % palette.length].fill,
+        borderWidth: 2,
+        pointRadius: 3
+      }));
+
+      multiRadarChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: RUBRIC_CONFIG.contributionAreas.map(a => a.length > 16 ? a.substring(0, 14) + '..' : a),
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              suggestedMin: 0,
+              suggestedMax: 5,
+              ticks: { stepSize: 1, display: false },
+              pointLabels: { font: { size: 9 } }
+            }
+          },
+          plugins: {
+            legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }
+          }
+        }
+      });
+    }
+
+    // Initialize application on load
+    window.addEventListener('DOMContentLoaded', () => {
+      navigateTo('landing');
+    });
+  </script>
+</body>
+</html>
